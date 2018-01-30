@@ -1,0 +1,712 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Sample SNOW api",
+        "description": "Detailed description, _with_ \n markdown and multiline *support*",
+        "version": "0.1.2"
+    },
+    "servers": [
+        {
+            "url": "https://telianotest.service-now.com/{basePath}",
+            "description": "Test instance",
+            "variables": {
+                "basePath": {
+                    "default": "api/neta4"
+                }
+            }
+        },
+        {
+            "url": "https://teliano.service-now.com/{basePath}",
+            "description": "Production instance",
+            "variables": {
+                "basePath": {
+                    "default": "api/neta4"
+                }
+            }
+        }
+    ],
+    "components": {
+        "schemas": {
+            "x-neo-logging--header": {
+                "type": "string"
+            },
+            "sys_id--query": {
+                "type": "string"
+            },
+            "sys_id--path": {
+                "type": "string"
+            },
+            "id--path": {
+                "type": "string"
+            },
+            "put--gdprrequests-": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "state": {
+                        "type": "string",
+                        "minLength": 1
+                    }
+                },
+                "required": [
+                    "state"
+                ],
+                "example": {
+                    "state": "cancel"
+                }
+            },
+            "post--objectionchangerequests": {
+                "description": "",
+                "type": "object",
+                "example": {
+                    "description": "jeg vil vite alt om meg",
+                    "short_description": "GDPR -   fra Postman",
+                    "category": "OBJECTION_USER_DATA",
+                    "u_partyemail": "someone@somewhere.com",
+                    "u_partyname": "Joe Pedersen",
+                    "u_partyidentifierrealm1": "CustomerId",
+                    "u_partyidentifiervalue1": "2475801",
+                    "u_tenantcode": "OC",
+                    "u_accessrequestedbo": "All",
+                    "u_accessrequesteddetaillevel": "1",
+                    "u_objected": [
+                        "Purpose-3"
+                    ],
+                    "u_objectionRevoked": [
+                        "p-10008",
+                        "p-10002"
+                    ]
+                },
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/GDPRRequest"
+                    },
+                    {
+                        "$ref": "#/components/schemas/post--objectionchangerequests-additional"
+                    }
+                ]
+            },
+            "put--staterequest": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "properties": {
+                        "type": "object",
+                        "properties": {
+                            "u_bss_state": {
+                                "type": "object",
+                                "properties": {
+                                    "description": {
+                                        "type": "string",
+                                        "minLength": 1
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "minLength": 1
+                                    }
+                                },
+                                "required": [
+                                    "description",
+                                    "type"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "u_bss_state"
+                        ]
+                    }
+                },
+                "required": [
+                    "type",
+                    "properties"
+                ],
+                "example": {
+                    "type": "object",
+                    "properties": {
+                        "u_bss_state": {
+                            "description": "New state of the Incident",
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "GDPRRequest": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "short_description": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "category": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "u_partyemail": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "u_partyname": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "u_partyidentifierrealm1": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "u_partyidentifiervalue1": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "u_tenantcode": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "u_accessrequestedbo": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "u_accessrequesteddetaillevel": {
+                        "type": "string",
+                        "minLength": 1
+                    }
+                },
+                "required": [
+                    "description",
+                    "short_description",
+                    "category",
+                    "u_partyemail",
+                    "u_partyname",
+                    "u_partyidentifierrealm1",
+                    "u_partyidentifiervalue1",
+                    "u_tenantcode",
+                    "u_accessrequestedbo",
+                    "u_accessrequesteddetaillevel"
+                ],
+                "example": {
+                    "description": "jeg vil vite alt om meg",
+                    "short_description": "GDPR -   fra Postman",
+                    "category": "FORGET_USER_DATA",
+                    "u_partyemail": "someone@somewhere.com",
+                    "u_partyname": "Joe Pedersen",
+                    "u_partyidentifierrealm1": "CustomerId",
+                    "u_partyidentifiervalue1": "2475801",
+                    "u_tenantcode": "OC",
+                    "u_accessrequestedbo": "All",
+                    "u_accessrequesteddetaillevel": "1"
+                }
+            },
+            "post--objectionchangerequests-additional": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "u_objected": {
+                        "type": "array",
+                        "items": {
+                            "required": [],
+                            "properties": {}
+                        }
+                    },
+                    "u_objectionRevoked": {
+                        "type": "array",
+                        "items": {
+                            "required": [],
+                            "properties": {}
+                        }
+                    }
+                },
+                "required": [
+                    "u_objected",
+                    "u_objectionRevoked"
+                ],
+                "example": {
+                    "description": "jeg vil vite alt om meg",
+                    "short_description": "GDPR -   fra Postman",
+                    "category": "OBJECTION_USER_DATA",
+                    "u_partyemail": "someone@somewhere.com",
+                    "u_partyname": "Joe Pedersen",
+                    "u_partyidentifierrealm1": "CustomerId",
+                    "u_partyidentifiervalue1": "2475801",
+                    "u_tenantcode": "OC",
+                    "u_accessrequestedbo": "All",
+                    "u_accessrequesteddetaillevel": "1",
+                    "u_objected": [
+                        "Purpose-3"
+                    ],
+                    "u_objectionRevoked": [
+                        "p-10008",
+                        "p-10002"
+                    ]
+                }
+            }
+        }
+    },
+    "paths": {
+        "/telia_create_incident": {
+            "post": {
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "OK(?)",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/gdprrequests/{id}": {
+            "put": {
+                "description": "Sets values on an existing GDPR request.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/put--gdprrequests-"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK(?)",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "{id}",
+                    "required": true,
+                    "description": "TODO",
+                    "in": "path",
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ],
+            "get": {
+                "description": "test get request from Id",
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK(?)",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/test_token": {
+            "get": {
+                "description": "Tests if a token is valid.",
+                "responses": {
+                    "200": {
+                        "description": "OK(?)",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/cancelrequest/{id}": {
+            "post": {
+                "description": "Cancel a registered request. Returns error if the request has started processing",
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK(?)",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "parameters": []
+        },
+        "/erasurerequests": {
+            "post": {
+                "description": "Creates an erasure request.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GDPRRequest"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK(?)",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "parameters": []
+        },
+        "/objectionchangerequests": {
+            "post": {
+                "description": "Create objection request.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/post--objectionchangerequests"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK(?)",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "parameters": []
+        },
+        "/logentry/{timestamp}": {
+            "get": {
+                "description": "Returns the loglines logged since timestamp - and returns the next timestamp",
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK(?)",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "{timestamp}",
+                    "required": true,
+                    "description": "TODO",
+                    "in": "path",
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ]
+        },
+        "/consentchangerequests": {
+            "post": {
+                "description": "",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GDPRRequest"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK(?)",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "parameters": []
+        },
+        "/taskstate": {
+            "put": {
+                "description": "",
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK(?)",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/accessrequests": {
+            "post": {
+                "description": "Creates an accessrequest.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GDPRRequest"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK(?)",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "parameters": []
+        },
+        "/staterequest": {
+            "put": {
+                "description": "Updates the state of an exisiting GDPR request",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/put--staterequest"
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK(?)",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "parameters": [],
+            "get": {
+                "description": "Gets the state of the incident",
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK(?)",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
